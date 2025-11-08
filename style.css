@@ -17,44 +17,127 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #eff8e2;
-  font-family: "Bungee", sans-serif;
+  background: radial-gradient(circle at center, #fffaf7 0%, #ffeaea 100%);
+  overflow: hidden;
+  position: relative;
+  font-family: 'Great Vibes', cursive;
+}
+
+/* --- AURÉOLE MULTICOLORE PASTEL --- */
+.aurora {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200vmax;
+  height: 200vmax;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    #ffd6e0,
+    #ffe5b9,
+    #e9ffd9,
+    #d8faff,
+    #e3d9ff,
+    #ffd6e0
+  );
+  filter: blur(200px);
+  animation: auroraSpin 20s linear infinite, auroraPulse 8s ease-in-out infinite alternate;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+/* rotation douce et effet de respiration */
+@keyframes auroraSpin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes auroraPulse {
+  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* --- PARTICULES SCINTILLANTES --- */
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sparkles::before,
+.sparkles::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white 1.5px, transparent 3px) repeat;
+  background-size: 100px 100px;
+  opacity: 0.4;
+  animation: sparkleMove 25s linear infinite;
+  mix-blend-mode: screen;
+}
+
+.sparkles::after {
+  background-size: 120px 120px;
+  opacity: 0.3;
+  animation-direction: reverse;
+}
+
+@keyframes sparkleMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-60px, -60px); }
+}
+
+/* --- TEXTE --- */
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
 .text-shadows {
   color: var(--color-primary);
-  text-transform: uppercase;
   font-size: calc(2rem + 5vw);
-  letter-spacing: 0.4rem;
-  text-align: center;
+  letter-spacing: 0.1rem;
   text-shadow:
-    3px 3px 0 var(--color-secondary),
-    6px 6px 0 var(--color-tertiary),
-    9px 9px 0 var(--color-quaternary),
-    12px 12px 0 var(--color-quinary);
-  animation: shadows 1.2s ease-in infinite;
+    2px 2px 0 var(--color-secondary),
+    4px 4px 0 var(--color-tertiary),
+    6px 6px 0 var(--color-quaternary),
+    8px 8px 0 var(--color-quinary);
+  animation: shadows 1.5s ease-in-out infinite;
 }
 
 @keyframes shadows {
-  0%, 100% { text-shadow: none; transform: translate(0, 0); }
+  0%, 100% {
+    text-shadow: none;
+    transform: translate(0, 0);
+  }
   25% {
-    transform: translate(-6px, -6px);
+    transform: translate(-3px, -3px);
     text-shadow:
-      3px 3px 0 var(--color-secondary),
-      6px 6px 0 var(--color-tertiary);
+      2px 2px 0 var(--color-secondary),
+      4px 4px 0 var(--color-tertiary);
   }
   50% {
-    transform: translate(-12px, -12px);
-    text-shadow:
-      3px 3px 0 var(--color-secondary),
-      6px 6px 0 var(--color-tertiary),
-      9px 9px 0 var(--color-quaternary),
-      12px 12px 0 var(--color-quinary);
-  }
-  75% {
     transform: translate(-6px, -6px);
     text-shadow:
-      3px 3px 0 var(--color-secondary),
-      6px 6px 0 var(--color-tertiary);
+      2px 2px 0 var(--color-secondary),
+      4px 4px 0 var(--color-tertiary),
+      6px 6px 0 var(--color-quaternary),
+      8px 8px 0 var(--color-quinary);
+  }
+  75% {
+    transform: translate(-3px, -3px);
+    text-shadow:
+      2px 2px 0 var(--color-secondary),
+      4px 4px 0 var(--color-tertiary);
   }
 }
